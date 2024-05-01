@@ -17,42 +17,7 @@ import org.springframework.core.ParameterizedTypeReference;
 @SpringBootApplication
 public class CountryDetailsApplication {
 
-	// Logger to send output to Console
-	private static final Logger log = LoggerFactory.getLogger(CountryDetailsApplication.class);
-
 	public static void main(String[] args) {
 		SpringApplication.run(CountryDetailsApplication.class, args);
 	}
-
-	// RestTemplate for JSON processing
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
-
-	@Bean
-	@Profile("!test")
-	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-		return args -> {
-			String countryURI = "https://restcountries.com/v3.1/name/united states";
-			log.info("Running GET HTTP method against " + countryURI);
-			// https://stackoverflow.com/a/31947188/21808087
-			ResponseEntity<List<Country>> countryResponse =
-			    // Execute GET against countryURI, response returned as ResponseEntity
-			    restTemplate.exchange(countryURI, HttpMethod.GET, null, new ParameterizedTypeReference<List<Country>>() {});
-			// Extract response body
-			List<Country> returnedCountries = countryResponse.getBody();
-			// Print details of returned countries
-			for (Country countryDet : returnedCountries) {
-				String countryIsIndependent = countryDet.getIsIndependent();
-				int countryArea = countryDet.getTotalArea();
-				int countryPop = countryDet.getTotalPopulation();
-				log.info("Is Independent Country?: " + countryIsIndependent);
-				log.info("Total Country Area: " + countryArea);
-				log.info("Total Country Population: " + countryPop);
-			}
-			
-		};
-	}
-
 }
