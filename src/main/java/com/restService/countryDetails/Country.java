@@ -3,7 +3,7 @@ package com.restService.countryDetails;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknow = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Country {
 
     // Private Class Properties
@@ -15,19 +15,6 @@ public class Country {
     public Country(@JsonProperty("independent") String isIndependentVal, @JsonProperty("area") int totalAreaVal, @JsonProperty("population")  int totalPopulationVal) {
         this.isIndependent = isIndependentVal;
         this.totalArea = totalAreaVal;
-        this.totalPopulationVal = totalPopulationVal;
-    }
-    
-    // Class Setters
-    public void setIsIndependent(String isIndependentVal) {
-        this.isIndependent = isIndependentVal;
-    }
-
-    public void setTotalArea (int totalAreaVal) {
-        this.totalArea = totalAreaVal;
-    }
-
-    public void setTotalPopulation (int totalPopulationVal) {
         this.totalPopulation = totalPopulationVal;
     }
     
